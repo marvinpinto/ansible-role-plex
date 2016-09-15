@@ -1,0 +1,5 @@
+---
+- name: 'restart-ansible-role-plex'
+  service:
+    name: 'plexmediaserver'
+    state: 'restarted'
