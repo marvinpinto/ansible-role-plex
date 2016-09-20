@@ -16,17 +16,3 @@
     name: 'plexmediaserver'
     state: 'started'
     enabled: 'yes'
-
-- name: 'Create the transcoding directory that will be used by plex'
-  file:
-    path: "{{ plex_app_transcode_directory }}"
-    state: 'directory'
-    owner: 'plex'  # This user is automatically created via the plex installer
-    mode: '0755'
-
-- name: 'Create the config/library directory that will be used by plex'
-  file:
-    path: "{{ plex_app_library_directory }}"
-    state: 'directory'
-    owner: 'plex'  # This user is automatically created via the plex installer
-    mode: '0755'
