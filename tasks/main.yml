@@ -16,3 +16,5 @@
     name: 'plexmediaserver'
     state: 'started'
     enabled: 'yes'
+
+- meta: flush_handlers
