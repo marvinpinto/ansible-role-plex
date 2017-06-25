@@ -20,7 +20,7 @@ script:
   - ansible-playbook -v --diff tests/test.yml
   - >
     ansible-playbook tests/test.yml
-    | grep -q 'changed=0.*failed=0'
+    | grep -q 'changed=1.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
   - 'curl -X GET http://localhost:32400'
