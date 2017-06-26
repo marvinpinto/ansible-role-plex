@@ -20,7 +20,7 @@ Role Variables
 
 ``` yaml
 # Version
-plex_server_version: '1.1.4.2757-24ffd60'
+plex_server_version: '1.5.7.4016-25d94bad9'
 
 # Application config
 #
@@ -43,10 +43,10 @@ Use it in a playbook as follows:
 ```yaml
 - hosts: '127.0.0.1'
   roles:
-    - role: 'marvinpinto.plex'
-      become: true
+    - { role: marvinpinto.plex, become: true, tags: ["plex"] }
 ```
 
+When re-running the playbook to upgrade versions of plex, make the appropriate version update in the `plex_server_version` variable, then you can run only the plex portion of the playbook with `ansible-playbook playbook.yml -t plex`
 
 Development
 -----------
