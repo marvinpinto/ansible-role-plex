@@ -13,7 +13,7 @@
 - name: "Install Plex Media Server version {{ plex_server_version }}"
   apt:
     deb: "/tmp/plexmediaserver_{{ plex_server_version }}_amd64.deb"
-    state: 'installed'
+    state: 'present'
   notify: 'restart-ansible-role-plex'
   when: process_results.stdout == ""
 
