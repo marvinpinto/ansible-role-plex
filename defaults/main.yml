@@ -1,7 +1,4 @@
 ---
-# Version
-plex_server_version: '1.5.7.4016-25d94bad9'
-
 # Application config
 #
 # Note that if you intend on using these directories, you will need to manually
