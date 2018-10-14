@@ -1,27 +1,28 @@
 ---
-- name: "Checking installed/running version"
-  shell: ps -ef | grep -i plex | grep {{ plex_server_version }} &> /dev/null
-  register: process_results
-
-- name: "Download the .deb file for Plex Media Server version {{ plex_server_version }}"
-  get_url:
-    url: "https://downloads.plex.tv/plex-media-server/{{ plex_server_version }}/plexmediaserver_{{ plex_server_version }}_amd64.deb"
-    dest: "/tmp/plexmediaserver_{{ plex_server_version }}_amd64.deb"
-    mode: '0644'
-  when: process_results.stdout == ""
-
-- name: "Install Plex Media Server version {{ plex_server_version }}"
-  apt:
-    deb: "/tmp/plexmediaserver_{{ plex_server_version }}_amd64.deb"
+- name: 'Add the Plex apt signing key'
+  become: true
+  apt_key:
+    url: 'https://downloads.plex.tv/plex-keys/PlexSign.key'
     state: 'present'
+
+- name: 'Add the Plex Ubuntu repo'
+  become: true
+  apt_repository:
+    repo: 'deb https://downloads.plex.tv/repo/deb public main'
+    state: 'present'
+
+- name: 'Install the latest version of Plex Media Server'
+  become: true
+  apt:
+    name: 'plexmediaserver'
+    state: 'latest'
   notify: 'restart-ansible-role-plex'
-  when: process_results.stdout == ""
+
+- meta: flush_handlers
 
 - name: 'Start the plexmediaserver daemon'
+  become: true
   service:
     name: 'plexmediaserver'
     state: 'started'
     enabled: 'yes'
-  when: process_results.stdout == ""
-
-- meta: flush_handlers

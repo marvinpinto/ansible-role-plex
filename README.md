@@ -19,9 +19,6 @@ Role Variables
 --------------
 
 ``` yaml
-# Version
-plex_server_version: '1.5.7.4016-25d94bad9'
-
 # Application config
 #
 # Note that if you intend on using these directories, you will need to manually
@@ -46,7 +43,7 @@ Use it in a playbook as follows:
     - { role: marvinpinto.plex, become: true, tags: ["plex"] }
 ```
 
-When re-running the playbook to upgrade versions of plex, make the appropriate version update in the `plex_server_version` variable, then you can run only the plex portion of the playbook with `ansible-playbook playbook.yml -t plex`
+When re-running the playbook to upgrade versions of plex, run only the plex portion of the playbook with `ansible-playbook playbook.yml -t plex`
 
 Development
 -----------
